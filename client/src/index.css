@@ -46,53 +46,46 @@
   --font-sans: 'Inter', sans-serif;
   --font-heading: 'Oswald', sans-serif;
   
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 }
 
 :root {
-  /* Dark Industrial Theme by default as requested */
-  --background: 220 15% 10%; /* Dark slate/black */
-  --foreground: 0 0% 95%; /* White text */
+  /* Luxury Dark Theme */
+  --background: 215 14% 7%; /* Deep Navy Black */
+  --foreground: 0 0% 98%; /* Pristine White */
 
-  --card: 220 15% 14%; /* Slightly lighter dark */
-  --card-foreground: 0 0% 95%;
+  --card: 215 14% 11%; /* Subtle Darker Card */
+  --card-foreground: 0 0% 96%;
 
-  --popover: 220 15% 12%;
-  --popover-foreground: 0 0% 95%;
+  --popover: 215 14% 10%;
+  --popover-foreground: 0 0% 97%;
 
-  --primary: 350 85% 55%; /* Aggressive Red */
+  --primary: 355 90% 58%; /* Luxury Red/Crimson */
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 210 20% 20%; /* Dark Blue-ish Gray */
-  --secondary-foreground: 0 0% 90%;
+  --secondary: 220 25% 18%; /* Sophisticated Gray-Blue */
+  --secondary-foreground: 0 0% 92%;
 
-  --muted: 210 20% 25%;
-  --muted-foreground: 215 15% 70%;
+  --muted: 220 20% 22%;
+  --muted-foreground: 215 12% 75%;
 
-  --accent: 200 90% 50%; /* Electric Blue for specialized accents */
+  --accent: 200 95% 55%; /* Premium Blue */
   --accent-foreground: 0 0% 100%;
 
   --destructive: 0 85% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 215 20% 25%;
+  --border: 215 20% 28%;
   --input: 215 20% 25%;
-  --ring: 350 85% 55%;
+  --ring: 355 90% 58%;
 
-  --radius: 0.25rem; /* Sharp edges for industrial feel */
+  --radius: 0.75rem;
   
-  --chart-1: 350 85% 55%;
-  --chart-2: 200 90% 50%;
-  --chart-3: 220 15% 20%;
-  --chart-4: 0 0% 60%;
-  --chart-5: 0 0% 40%;
-}
-
-/* Force dark mode styles everywhere since the design is dark-themed */
-.dark {
-  --background: 220 15% 10%;
-  --foreground: 0 0% 95%;
-  /* ... same as root since we want dark default */
+  --chart-1: 355 90% 58%;
+  --chart-2: 200 95% 55%;
+  --chart-3: 220 25% 18%;
+  --chart-4: 0 0% 70%;
+  --chart-5: 0 0% 45%;
 }
 
 @layer base {
@@ -103,6 +96,54 @@
     @apply font-sans antialiased bg-background text-foreground;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading uppercase tracking-wide;
+    @apply font-heading font-bold tracking-tight;
+  }
+  
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Premium animations and effects */
+@layer utilities {
+  .luxury-glow {
+    box-shadow: 0 0 60px rgba(355, 90%, 58%, 0.15);
+  }
+
+  .premium-border {
+    border: 1px solid;
+    border-image: linear-gradient(135deg, rgba(200, 100%, 50%, 0.3) 0%, rgba(200, 95%, 55%, 0) 100%) 1;
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .text-luxury {
+    letter-spacing: -0.02em;
+    font-weight: 600;
   }
 }

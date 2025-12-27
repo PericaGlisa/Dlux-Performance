@@ -1,75 +1,137 @@
-import { MapPin, Phone, Mail, Clock, Instagram, Facebook } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Instagram, Facebook, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 export function Footer() {
   return (
-    <footer className="bg-card border-t border-border pt-16 pb-8">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+    <footer className="bg-gradient-to-b from-card to-background border-t border-white/5 pt-20 pb-8">
+      <div className="container mx-auto px-4 md:px-8">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           
           {/* Brand Info */}
-          <div>
-            <h3 className="text-2xl font-heading font-bold italic tracking-tighter text-white mb-4">
-              D-LUX <span className="text-primary">PERFORMANCE</span>
+          <motion.div variants={itemVariants}>
+            <h3 className="text-3xl font-heading font-bold text-white mb-6 tracking-tight">
+              D-LUX
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+                PERFORMANCE
+              </span>
             </h3>
-            <p className="text-muted-foreground mb-6">
-              Specijalizovan servis za sve tipove vozila. Ovlašćeni prodavac Motul ulja. 
-              Brzo, efikasno i profesionalno održavanje vašeg automobila.
+            <p className="text-gray-400 mb-8 leading-relaxed font-light max-w-xs">
+              Specijalizovani servis za sve tipove vozila. 
+              Ovlašćeni prodavač Motul ulja sa više od dve decenije iskustva.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="bg-secondary p-2 rounded-full text-white hover:bg-primary transition-colors">
-                <Instagram size={20} />
-              </a>
-              <a href="#" className="bg-secondary p-2 rounded-full text-white hover:bg-primary transition-colors">
-                <Facebook size={20} />
-              </a>
+              {[
+                { icon: Instagram, href: "#" },
+                { icon: Facebook, href: "#" },
+              ].map((social, i) => (
+                <motion.a
+                  key={i}
+                  href={social.href}
+                  className="bg-gradient-to-br from-primary/30 to-accent/20 p-3 rounded-full text-white hover:from-primary/60 hover:to-accent/40 transition-all duration-300 shadow-lg hover:shadow-xl border border-white/10"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <social.icon size={20} />
+                </motion.a>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
-          <div>
-            <h4 className="text-lg font-heading font-bold text-white mb-6 uppercase">Kontakt</h4>
-            <div className="space-y-4">
-              <div className="flex items-start gap-3 text-gray-300">
-                <MapPin className="text-primary mt-1 shrink-0" />
-                <span>
-                  Batajnički drum 1<br />
-                  11273 Batajnica, Beograd
-                </span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-300">
-                <Phone className="text-primary shrink-0" />
-                <a href="tel:+38160000000" className="hover:text-primary transition-colors">+381 60 000 0000</a>
-              </div>
-              <div className="flex items-center gap-3 text-gray-300">
-                <Mail className="text-primary shrink-0" />
-                <a href="mailto:info@dlux-performance.rs" className="hover:text-primary transition-colors">info@dlux-performance.rs</a>
-              </div>
+          <motion.div variants={itemVariants}>
+            <h4 className="text-xl font-heading font-bold text-white mb-8 uppercase tracking-wider">Kontakt</h4>
+            <div className="space-y-6">
+              <motion.div className="flex items-start gap-4 group cursor-pointer" whileHover={{ x: 5 }}>
+                <MapPin className="text-primary mt-1 shrink-0 group-hover:text-accent transition-colors" size={20} />
+                <div>
+                  <p className="text-xs uppercase text-gray-500 font-semibold tracking-wider mb-1">Lokacija</p>
+                  <span className="text-gray-300 font-light">
+                    Batajnički drum 1<br />
+                    11273 Batajnica, Beograd
+                  </span>
+                </div>
+              </motion.div>
+
+              <motion.div className="flex items-center gap-4 group cursor-pointer" whileHover={{ x: 5 }}>
+                <Phone className="text-primary shrink-0 group-hover:text-accent transition-colors" size={20} />
+                <div>
+                  <p className="text-xs uppercase text-gray-500 font-semibold tracking-wider mb-1">Pozovi</p>
+                  <a href="tel:+38160000000" className="text-gray-300 font-light hover:text-primary transition-colors">+381 60 000 0000</a>
+                </div>
+              </motion.div>
+
+              <motion.div className="flex items-center gap-4 group cursor-pointer" whileHover={{ x: 5 }}>
+                <Mail className="text-primary shrink-0 group-hover:text-accent transition-colors" size={20} />
+                <div>
+                  <p className="text-xs uppercase text-gray-500 font-semibold tracking-wider mb-1">Email</p>
+                  <a href="mailto:info@dlux-performance.rs" className="text-gray-300 font-light hover:text-primary transition-colors">info@dlux-performance.rs</a>
+                </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Working Hours */}
-          <div>
-            <h4 className="text-lg font-heading font-bold text-white mb-6 uppercase">Radno Vreme</h4>
-            <div className="space-y-3">
-              <div className="flex justify-between text-gray-300 border-b border-white/10 pb-2">
-                <span className="flex items-center gap-2"><Clock size={16} /> Ponedeljak - Petak</span>
-                <span className="font-bold">08:00 - 18:00</span>
-              </div>
-              <div className="flex justify-between text-gray-300 border-b border-white/10 pb-2">
-                <span className="flex items-center gap-2"><Clock size={16} /> Subota</span>
-                <span className="font-bold">09:00 - 15:00</span>
-              </div>
-              <div className="flex justify-between text-gray-400">
-                <span className="flex items-center gap-2"><Clock size={16} /> Nedelja</span>
-                <span>Zatvoreno</span>
-              </div>
+          <motion.div variants={itemVariants}>
+            <h4 className="text-xl font-heading font-bold text-white mb-8 uppercase tracking-wider">Radno Vreme</h4>
+            <div className="space-y-4">
+              {[
+                { day: "Ponedeljak - Petak", hours: "08:00 - 18:00" },
+                { day: "Subota", hours: "09:00 - 15:00" },
+                { day: "Nedelja", hours: "Zatvoreno" },
+              ].map((item, i) => (
+                <motion.div 
+                  key={i}
+                  className="flex justify-between items-center pb-3 border-b border-white/10"
+                  whileHover={{ paddingLeft: 8 }}
+                >
+                  <span className="text-gray-300 font-light flex items-center gap-2">
+                    <Clock size={16} className="text-primary shrink-0" /> {item.day}
+                  </span>
+                  <span className="font-semibold text-white">{item.hours}</span>
+                </motion.div>
+              ))}
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div className="border-t border-white/10 pt-8 text-center text-sm text-gray-500">
-          <p>&copy; {new Date().getFullYear()} D-LUX Performance. Sva prava zadržana.</p>
-        </div>
+        {/* Bottom Bar */}
+        <motion.div 
+          className="border-t border-white/10 pt-10 flex flex-col md:flex-row items-center justify-between gap-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <p className="text-sm text-gray-500 font-light text-center md:text-left">
+            &copy; {new Date().getFullYear()} D-LUX Performance. Sva prava zadržana.
+          </p>
+          <motion.button 
+            className="flex items-center gap-2 text-primary hover:text-accent transition-colors font-semibold text-sm uppercase tracking-wider cursor-pointer group"
+            whileHover={{ x: 5 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            Nazad na vrh <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          </motion.button>
+        </motion.div>
       </div>
     </footer>
   );
