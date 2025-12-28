@@ -10,8 +10,8 @@ const menuVariants = {
     opacity: 0,
     x: "100%",
     transition: {
-      duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.3,
+      ease: [0.32, 0, 0.67, 0],
       staggerChildren: 0.05,
       staggerDirection: -1
     }
@@ -20,17 +20,17 @@ const menuVariants = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.4,
       ease: [0.22, 1, 0.36, 1],
-      staggerChildren: 0.1,
-      delayChildren: 0.2
+      staggerChildren: 0.08,
+      delayChildren: 0.1
     }
   }
 };
 
 const linkVariants = {
-  closed: { x: 50, opacity: 0 },
-  open: { x: 0, opacity: 1 }
+  closed: { x: 20, opacity: 0 },
+  open: { x: 0, opacity: 1, transition: { duration: 0.3, ease: "easeOut" } }
 };
 
 export function Navbar() {
@@ -165,6 +165,7 @@ export function Navbar() {
               animate="open"
               exit="closed"
               className="fixed inset-y-0 right-0 w-full max-w-sm bg-background border-l border-white/5 z-[58] md:hidden shadow-[10px_0_40px_rgba(0,0,0,0.8)] flex flex-col p-8 pt-32"
+              style={{ willChange: "transform, opacity" }}
             >
               <div className="flex flex-col gap-8 flex-1">
                 {[
