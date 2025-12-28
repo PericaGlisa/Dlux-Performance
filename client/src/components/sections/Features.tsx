@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Timer, Award, Zap, ThumbsUp } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 
 const features = [
   {
@@ -37,34 +37,44 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15, delayChildren: 0.3 },
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
+  hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
   visible: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.7, ease: [0.23, 1, 0.32, 1] }
+    transition: { duration: 0.6, ease: [0.23, 1, 0.32, 1] }
   },
 };
 
-// 3D Card component with tilt effect
+// 3D Card component with tilt effect optimized for performance
 function Card3D({ children, className }: { children: React.ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
+  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
 
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["8deg", "-8deg"]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-8deg", "8deg"]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
+    if (!ref.current || isMobile) return;
     const rect = ref.current.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -87,13 +97,14 @@ function Card3D({ children, className }: { children: React.ReactNode; className?
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
-        rotateX,
-        rotateY,
+        rotateX: isMobile ? 0 : rotateX,
+        rotateY: isMobile ? 0 : rotateY,
         transformStyle: "preserve-3d",
+        willChange: isMobile ? "auto" : "transform"
       }}
       className={className}
     >
-      <div style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }}>
+      <div style={{ transform: isMobile ? "none" : "translateZ(30px)", transformStyle: "preserve-3d" }}>
         {children}
       </div>
     </motion.div>
@@ -101,38 +112,49 @@ function Card3D({ children, className }: { children: React.ReactNode; className?
 }
 
 export function Features() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
-    <section className="py-32 bg-background relative overflow-hidden">
-      {/* Premium animated background decoration */}
-      <div className="absolute inset-0">
+    <section className="py-20 md:py-32 bg-background relative overflow-hidden">
+      {/* Premium animated background decoration - Simplified for performance */}
+      <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="absolute top-1/2 -left-1/4 w-1/2 h-1/2 bg-primary/10 rounded-full blur-[120px]"
-          animate={{
-            scale: [1, 1.2, 1],
-            x: [0, 50, 0],
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent/8 rounded-full blur-[100px]"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            y: [0, -30, 0],
+          animate={isMobile ? {} : {
+            scale: [1, 1.1, 1],
+            x: [0, 30, 0],
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         />
+        {!isMobile && (
+          <motion.div
+            className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent/8 rounded-full blur-[100px]"
+            animate={{
+              scale: [1.1, 1, 1.1],
+              y: [0, -20, 0],
+            }}
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          />
+        )}
       </div>
 
       {/* Noise overlay */}
-      <div className="absolute inset-0 noise-overlay pointer-events-none" />
+      <div className="absolute inset-0 noise-overlay pointer-events-none opacity-40" />
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-20"
-          initial={{ opacity: 0, y: 40 }}
+          className="text-center max-w-3xl mx-auto mb-16 md:mb-20"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
         >
           <h2 className="text-fluid-h2 font-heading font-bold text-white mb-6 tracking-tight">
             Zašto Izabrati
@@ -151,7 +173,7 @@ export function Features() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-50px" }}
         >
           {features.map((feature, index) => (
             <motion.div
@@ -160,25 +182,21 @@ export function Features() {
               className="group perspective-1000"
             >
               <Card3D>
-                <div className={`relative bg-gradient-to-br ${feature.bgGradient} p-8 rounded-2xl border border-white/5 h-full overflow-hidden transition-all duration-500 group-hover:border-white/20`}>
-                  {/* Glow effect on hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-xl`} />
-
-                  {/* Shimmer overlay */}
-                  <div className="absolute inset-0 shimmer-premium opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className={`relative bg-gradient-to-br ${feature.bgGradient} p-6 md:p-8 rounded-2xl border border-white/5 h-full overflow-hidden transition-all duration-500 group-hover:border-white/20`}>
+                  {/* Glow effect on hover - Optimized */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 blur-xl pointer-events-none`} />
 
                   <div className="relative z-10">
                     {/* Animated icon container */}
                     <motion.div
-                      className={`w-16 h-16 bg-gradient-to-br ${feature.gradient} rounded-xl flex items-center justify-center mb-6 shadow-lg relative overflow-hidden`}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ type: "spring", stiffness: 300 }}
+                      className={`w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br ${feature.gradient} rounded-xl flex items-center justify-center mb-6 shadow-lg relative overflow-hidden`}
+                      whileHover={isMobile ? {} : { scale: 1.05, rotate: 3 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
                     >
-                      <div className="absolute inset-0 shimmer-premium" />
-                      <feature.icon className="text-white w-8 h-8 relative z-10 icon-glow" />
+                      <feature.icon className="text-white w-7 h-7 md:w-8 md:h-8 relative z-10 icon-glow" />
                     </motion.div>
 
-                    <h3 className="text-2xl font-bold text-white mb-3 font-heading group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-300 transition-all duration-300">
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-3 font-heading group-hover:text-primary transition-colors duration-300">
                       {feature.title}
                     </h3>
                     <p className="text-gray-300/80 text-sm leading-relaxed font-light">

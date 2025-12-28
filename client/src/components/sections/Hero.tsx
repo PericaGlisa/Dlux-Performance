@@ -74,6 +74,9 @@ export function Hero() {
           src={heroBg}
           alt="D-LUX Performance Workshop"
           className="w-full h-full object-cover scale-110 opacity-70"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-background/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40" />
@@ -105,7 +108,7 @@ export function Hero() {
 
       <motion.div
         className="container relative z-10 px-4 md:px-8 pt-20"
-        style={{ y: textY, opacity }}
+        style={{ y: textY, opacity, willChange: "transform, opacity" }}
       >
         <motion.div
           className="max-w-4xl"

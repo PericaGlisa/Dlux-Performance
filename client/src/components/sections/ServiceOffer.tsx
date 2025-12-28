@@ -99,10 +99,12 @@ export function ServiceOffer() {
             <div className="relative aspect-square rounded-3xl overflow-hidden border border-white/10 shadow-2xl group-hover:border-primary/50 transition-all duration-300">
               <motion.img
                 src={oilImage}
-                alt="Motul Oil Premium"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                alt="Motul Premium Oil"
+                className="w-full h-full object-cover scale-105 group-hover:scale-110 transition-transform duration-1000"
+                loading="lazy"
+                decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
               <motion.div
                 className="absolute bottom-8 left-8 right-8"

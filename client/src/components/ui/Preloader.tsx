@@ -5,10 +5,10 @@ export function Preloader() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Wait for page to load then animate out
+        // Wait for page to load then animate out - Reduced duration for faster perceived performance
         const timer = setTimeout(() => {
             setIsLoading(false);
-        }, 2000);
+        }, 1200);
 
         return () => clearTimeout(timer);
     }, []);
@@ -21,26 +21,17 @@ export function Preloader() {
                     initial={{ opacity: 1 }}
                     exit={{
                         opacity: 0,
-                        transition: { duration: 0.5, ease: [0.23, 1, 0.32, 1] }
+                        transition: { duration: 0.4, ease: [0.23, 1, 0.32, 1] }
                     }}
                 >
-                    {/* Background glow elements */}
-                    <div className="absolute inset-0 overflow-hidden">
+                    {/* Background glow elements - Simplified for preloader performance */}
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
                         <motion.div
-                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[100px]"
+                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px]"
                             animate={{
-                                scale: [1, 1.2, 1],
-                                opacity: [0.3, 0.5, 0.3],
-                            }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                        />
-                        <motion.div
-                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[80px]"
-                            animate={{
-                                scale: [1.2, 1, 1.2],
                                 opacity: [0.2, 0.4, 0.2],
                             }}
-                            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                         />
                     </div>
 

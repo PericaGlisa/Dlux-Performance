@@ -23,7 +23,13 @@ export function Parts() {
     <section id="delovi" className="py-16 md:py-32 bg-gradient-to-b from-background via-card/50 to-background relative overflow-hidden">
       {/* Background texture */}
       <div className="absolute inset-0 opacity-20">
-        <img src={textureImage} alt="Texture" className="w-full h-full object-cover" />
+        <img 
+          src={textureImage} 
+          alt="Texture" 
+          className="w-full h-full object-cover" 
+          loading="lazy"
+          decoding="async"
+        />
       </div>
 
       <div className="absolute inset-0">
