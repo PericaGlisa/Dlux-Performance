@@ -14,5 +14,16 @@ export const insertUserSchema = createInsertSchema(users).pick({
   password: true,
 });
 
+export const contactFormSchema = z.object({
+  name: z.string().min(2, { message: "Ime mora imati bar 2 karaktera." }),
+  phone: z.string().min(6, { message: "Unesite ispravan broj telefona." }),
+  vehicle: z.string().min(2, { message: "Unesite marku i model vozila." }),
+  serviceType: z.string().min(1, { message: "Izaberite tip usluge." }),
+  date: z.string().optional(),
+  time: z.string().optional(),
+  message: z.string().optional(),
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
+export type ContactFormValues = z.infer<typeof contactFormSchema>;

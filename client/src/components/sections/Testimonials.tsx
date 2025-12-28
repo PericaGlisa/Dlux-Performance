@@ -31,7 +31,7 @@ const testimonials = [
   {
     name: "Dejan M.",
     car: "Škoda Octavia RS",
-    text: "Zakazao online, termin čuvan precizno. Auto pregledan detaljno. Ovo je servis kojem se mogu vratiti.",
+    text: "Zakazao online, termin dogovoren precizno. Auto pregledan detaljno. Ovo je servis kojem se mogu vratiti.",
     rating: 5
   },
   {
@@ -50,22 +50,22 @@ export function Testimonials() {
       </div>
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <motion.div 
+        <motion.div
           className="text-center max-w-2xl mx-auto mb-16"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
         >
-          <h2 className="text-5xl md:text-6xl font-heading font-bold text-white mb-6 tracking-tight">
+          <h2 className="text-fluid-h2 font-heading font-bold text-white mb-6 tracking-tight">
             Šta Kažu
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+            <span className="gradient-text-animated">
               Klijenti
             </span>
           </h2>
-          <p className="text-xl text-gray-300 font-light">
-            Zadovoljstvo klijenta je naša jedina mjera. Čitajte ondje što kažu oni koji prate nas.
+          <p className="text-xl text-gray-300/80 font-light leading-relaxed">
+            Zadovoljstvo klijenta je naša jedina mera. Čitajte ovde šta kažu oni koji nas prate.
           </p>
         </motion.div>
 
@@ -73,6 +73,13 @@ export function Testimonials() {
           opts={{
             align: "start",
             loop: true,
+          }}
+          setApi={(api) => {
+            if (!api) return;
+            const interval = setInterval(() => {
+              api.scrollNext();
+            }, 5000);
+            return () => clearInterval(interval);
           }}
           className="w-full max-w-6xl mx-auto"
         >
@@ -85,9 +92,9 @@ export function Testimonials() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05, duration: 0.5 }}
                 >
-                  <Card className="bg-gradient-to-br from-card to-card/50 border-white/10 h-full hover:border-primary/50 transition-all duration-300 shadow-xl hover:shadow-2xl">
+                  <Card className="glass-premium border-white/5 h-full hover:border-primary/30 transition-all duration-500 shadow-xl hover:shadow-2xl group overflow-hidden">
                     <CardContent className="flex flex-col p-8 h-full justify-between">
-                      <div className="mb-6">
+                      <div className="mb-6 flex-1">
                         <div className="flex gap-1 mb-4">
                           {[...Array(testimonial.rating)].map((_, i) => (
                             <motion.div
@@ -101,12 +108,12 @@ export function Testimonials() {
                             </motion.div>
                           ))}
                         </div>
-                        <p className="text-gray-200 italic text-base leading-relaxed">
+                        <p className="text-gray-200 italic text-base leading-relaxed min-h-[100px]">
                           &quot;{testimonial.text}&quot;
                         </p>
                       </div>
                       <div className="flex items-center gap-3 border-t border-white/5 pt-6">
-                        <motion.div 
+                        <motion.div
                           className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center font-bold text-white text-lg shadow-lg"
                           whileHover={{ scale: 1.1 }}
                         >

@@ -18,16 +18,16 @@ export function Footer() {
   return (
     <footer className="bg-gradient-to-b from-card to-background border-t border-white/5 pt-20 pb-8">
       <div className="container mx-auto px-4 md:px-8">
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-16 mb-16"
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16 mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          
+
           {/* Brand Info */}
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="sm:col-span-2 lg:col-span-1">
             <h3 className="text-3xl font-heading font-bold text-white mb-6 tracking-tight">
               D-LUX
               <br />
@@ -35,9 +35,9 @@ export function Footer() {
                 PERFORMANCE
               </span>
             </h3>
-            <p className="text-gray-400 mb-8 leading-relaxed font-light max-w-xs">
-              Specijalizovani servis za sve tipove vozila. 
-              Ovlašćeni prodavač Motul ulja sa više od dve decenije iskustva.
+            <p className="text-gray-400 mb-8 leading-relaxed font-light max-w-sm lg:max-w-xs">
+              Specijalizovani servis za sve tipove vozila.
+              Prodavac Motul ulja sa više od dve decenije iskustva.
             </p>
             <div className="flex gap-4">
               {[
@@ -91,23 +91,32 @@ export function Footer() {
           </motion.div>
 
           {/* Working Hours */}
-          <motion.div variants={itemVariants}>
-            <h4 className="text-xl font-heading font-bold text-white mb-8 uppercase tracking-wider">Radno Vreme</h4>
-            <div className="space-y-4">
+          <motion.div variants={itemVariants} className="sm:col-span-2 lg:col-span-1">
+            <h4 className="text-xl font-heading font-bold text-white mb-8 uppercase tracking-wider flex items-center gap-2">
+              <Clock size={20} className="text-primary" />
+              Radno Vreme
+            </h4>
+            <div className="space-y-3">
               {[
-                { day: "Ponedeljak - Petak", hours: "08:00 - 18:00" },
-                { day: "Subota", hours: "09:00 - 15:00" },
-                { day: "Nedelja", hours: "Zatvoreno" },
+                { day: "Ponedeljak - Petak", hours: "08:00 - 18:00", isOpen: true },
+                { day: "Subota", hours: "09:00 - 15:00", isOpen: true },
+                { day: "Nedelja", hours: "Zatvoreno", isOpen: false },
               ].map((item, i) => (
-                <motion.div 
+                <motion.div
                   key={i}
-                  className="flex justify-between items-center pb-3 border-b border-white/10"
-                  whileHover={{ paddingLeft: 8 }}
+                  className={`flex flex-wrap justify-between items-center p-4 rounded-xl transition-all gap-2 ${item.day === "Nedelja"
+                    ? "bg-primary/10 border border-primary/20"
+                    : "bg-white/5 border border-white/10"
+                    }`}
+                  whileHover={{ scale: 1.02, x: 5 }}
                 >
-                  <span className="text-gray-300 font-light flex items-center gap-2">
-                    <Clock size={16} className="text-primary shrink-0" /> {item.day}
+                  <span className="text-gray-300 font-medium text-sm">{item.day}</span>
+                  <span className={`font-bold text-xs sm:text-sm px-3 py-1 rounded-full whitespace-nowrap ${item.day === "Nedelja"
+                    ? "text-primary bg-primary/10"
+                    : "text-gray-400 bg-white/5"
+                    }`}>
+                    {item.hours}
                   </span>
-                  <span className="font-semibold text-white">{item.hours}</span>
                 </motion.div>
               ))}
             </div>
@@ -115,7 +124,7 @@ export function Footer() {
         </motion.div>
 
         {/* Bottom Bar */}
-        <motion.div 
+        <motion.div
           className="border-t border-white/10 pt-10 flex flex-col md:flex-row items-center justify-between gap-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -124,12 +133,19 @@ export function Footer() {
           <p className="text-sm text-gray-500 font-light text-center md:text-left">
             &copy; {new Date().getFullYear()} D-LUX Performance. Sva prava zadržana.
           </p>
-          <motion.button 
-            className="flex items-center gap-2 text-primary hover:text-accent transition-colors font-semibold text-sm uppercase tracking-wider cursor-pointer group"
-            whileHover={{ x: 5 }}
+          <motion.button
+            className="flex items-center gap-3 text-white/60 hover:text-white bg-white/5 hover:bg-white/10 px-6 py-3 rounded-full border border-white/10 hover:border-primary/50 transition-all duration-300 font-bold text-xs uppercase tracking-[0.2em] cursor-pointer group shadow-lg hover:shadow-primary/20"
+            whileHover={{ y: -3, scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            Nazad na vrh <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            Nazad na vrh
+            <motion.div
+              animate={{ y: [0, -4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <ArrowRight size={16} className="-rotate-90 group-hover:text-primary transition-colors" />
+            </motion.div>
           </motion.button>
         </motion.div>
       </div>

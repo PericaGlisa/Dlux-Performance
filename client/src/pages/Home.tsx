@@ -6,6 +6,8 @@ import { Features } from "@/components/sections/Features";
 import { Parts } from "@/components/sections/Parts";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { BookingSection } from "@/components/sections/BookingSection";
+import { Stats } from "@/components/sections/Stats";
+import { PartnerLogos } from "@/components/sections/PartnerLogos";
 
 export default function Home() {
   return (
@@ -13,16 +15,19 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <PartnerLogos />
         <ServiceOffer />
         <Features />
+        <Stats />
         <Parts />
         <Testimonials />
         <BookingSection />
         <section id="lokacija">
-           {/* Location is integrated in booking and footer, this ID serves for navigation scroll anchor */}
+          {/* Location is integrated in booking and footer, this ID serves for navigation scroll anchor */}
         </section>
       </main>
       <Footer />
     </div>
   );
 }
+
