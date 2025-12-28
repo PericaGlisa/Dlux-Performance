@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Gauge, Sparkles } from "lucide-react";
-import heroBg from "@assets/generated_images/premium_workshop_v2.png";
+import heroBg from "@assets/generated_images/dark_industrial_auto_mechanic_workshop_background.png";
 import { useRef } from "react";
 
 const containerVariants = {
@@ -73,11 +73,11 @@ export function Hero() {
         <img
           src={heroBg}
           alt="D-LUX Performance Workshop"
-          className="w-full h-full object-cover scale-110"
+          className="w-full h-full object-cover scale-110 opacity-70"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/30" />
-        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-background/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40" />
+        <div className="absolute inset-0 bg-black/60" />
       </motion.div>
 
       {/* Animated background elements with glow */}
