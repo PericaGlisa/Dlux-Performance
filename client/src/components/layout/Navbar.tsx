@@ -66,9 +66,11 @@ export function Navbar() {
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        scrolled
-          ? "bg-background/80 backdrop-blur-lg md:backdrop-blur-2xl border-b border-white/5 py-3 shadow-2xl"
-          : "bg-transparent py-6"
+        isOpen
+          ? "bg-background border-b border-white/5 py-3"
+          : scrolled
+            ? "bg-background/80 backdrop-blur-lg md:backdrop-blur-2xl border-b border-white/5 py-3 shadow-2xl"
+            : "bg-transparent py-6"
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-4 md:px-8">
@@ -155,7 +157,7 @@ export function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-background/60 backdrop-blur-xl z-[55] md:hidden"
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[55] md:hidden"
               onClick={() => setIsOpen(false)}
             />
 
@@ -164,8 +166,8 @@ export function Navbar() {
               initial="closed"
               animate="open"
               exit="closed"
-              className="fixed inset-y-0 right-0 w-full max-w-sm bg-background border-l border-white/5 z-[58] md:hidden shadow-[10px_0_40px_rgba(0,0,0,0.8)] flex flex-col p-8 pt-32"
-              style={{ willChange: "transform, opacity" }}
+              className="fixed inset-y-0 right-0 w-full max-w-sm bg-[#030303] border-l border-white/5 z-[58] md:hidden shadow-[10px_0_40px_rgba(0,0,0,0.8)] flex flex-col p-8 pt-32"
+              style={{ willChange: "transform" }}
             >
               <div className="flex flex-col gap-8 flex-1">
                 {[
