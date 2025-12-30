@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const menuVariants = {
   closed: {
-    opacity: 0,
     x: "100%",
     transition: {
       duration: 0.25,
@@ -17,7 +16,6 @@ const menuVariants = {
     }
   },
   open: {
-    opacity: 1,
     x: 0,
     transition: {
       duration: 0.3,
