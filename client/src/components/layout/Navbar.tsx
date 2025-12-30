@@ -10,9 +10,9 @@ const menuVariants = {
     opacity: 0,
     x: "100%",
     transition: {
-      duration: 0.3,
+      duration: 0.25,
       ease: [0.32, 0, 0.67, 0],
-      staggerChildren: 0.05,
+      staggerChildren: 0.03,
       staggerDirection: -1
     }
   },
@@ -20,17 +20,17 @@ const menuVariants = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 0.4,
+      duration: 0.3,
       ease: [0.22, 1, 0.36, 1],
-      staggerChildren: 0.08,
-      delayChildren: 0.1
+      staggerChildren: 0.05,
+      delayChildren: 0.05
     }
   }
 };
 
 const linkVariants = {
-  closed: { x: 20, opacity: 0 },
-  open: { x: 0, opacity: 1, transition: { duration: 0.3, ease: "easeOut" } }
+  closed: { x: 15, opacity: 0 },
+  open: { x: 0, opacity: 1, transition: { duration: 0.2, ease: "easeOut" } }
 };
 
 export function Navbar() {
