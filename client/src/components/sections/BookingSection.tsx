@@ -47,6 +47,7 @@ export function BookingSection() {
     try {
       // Formiranje teksta za email
       const serviceLabels: Record<string, string> = {
+        "prodaja-automobila": "Prodaja Automobila",
         "mali-servis": "Mali Servis",
         "veliki-servis": "Veliki Servis",
         "dijagnostika": "Kompjuterska Dijagnostika",
@@ -257,6 +258,7 @@ export function BookingSection() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent className="bg-card border-white/10 text-white">
+                          <SelectItem value="prodaja-automobila">Prodaja Automobila</SelectItem>
                           <SelectItem value="mali-servis">Mali Servis (Ulje i Filteri)</SelectItem>
                           <SelectItem value="veliki-servis">Veliki Servis</SelectItem>
                           <SelectItem value="kocnice">Kočnice</SelectItem>
