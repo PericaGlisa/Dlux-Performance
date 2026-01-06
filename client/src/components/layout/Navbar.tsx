@@ -9,19 +9,18 @@ const menuVariants = {
   closed: {
     x: "100%",
     transition: {
-      duration: 0.25,
-      ease: [0.32, 0, 0.67, 0],
-      staggerChildren: 0.03,
+      duration: 0.2,
+      ease: "easeInOut",
+      staggerChildren: 0.02,
       staggerDirection: -1
     }
   },
   open: {
     x: 0,
     transition: {
-      duration: 0.3,
-      ease: [0.22, 1, 0.36, 1],
-      staggerChildren: 0.05,
-      delayChildren: 0.05
+      duration: 0,
+      staggerChildren: 0.03,
+      delayChildren: 0
     }
   }
 };
@@ -63,7 +62,8 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        "fixed top-0 left-0 right-0 z-50",
+        !isOpen && "transition-all duration-500",
         isOpen
           ? "bg-[#030303] py-6 shadow-none"
           : scrolled
