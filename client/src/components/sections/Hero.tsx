@@ -119,9 +119,9 @@ export function Hero() {
           {/* Premium badge */}
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-2 glass-premium px-5 py-2.5 rounded-full mb-8 shimmer-premium"
+            className="inline-flex items-center gap-2 glass-premium px-5 py-2.5 rounded-full mb-8"
           >
-            <Sparkles size={16} className="text-primary icon-glow animate-pulse" />
+            <Sparkles size={16} className="text-primary icon-glow" />
             <span className="text-sm font-bold tracking-[0.2em] uppercase text-white/90">Luxury Auto Care</span>
           </motion.div>
 
@@ -154,10 +154,9 @@ export function Hero() {
               whileTap={{ scale: 0.98 }}
               className="relative"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
               <Button
                 size="lg"
-                className="relative bg-gradient-to-r from-primary to-accent hover:shadow-2xl text-white text-base px-8 py-5 uppercase font-bold tracking-wider h-auto rounded-xl shadow-xl transition-all duration-300 glow-pulse magnetic-btn"
+                className="relative bg-gradient-to-r from-primary to-accent hover:shadow-2xl text-white text-base px-8 py-5 uppercase font-bold tracking-wider h-auto rounded-xl shadow-xl transition-all duration-300 magnetic-btn"
                 onClick={scrollToBooking}
               >
                 Zakaži Mali Servis <ChevronRight className="ml-2 h-4 w-4" />
@@ -170,7 +169,7 @@ export function Hero() {
               <Button
                 size="lg"
                 variant="outline"
-                className="glass-premium border-white/20 hover:border-white/40 text-white text-base px-8 py-5 uppercase font-bold tracking-wider h-auto rounded-xl shadow-xl transition-all duration-300 shimmer-premium"
+                className="glass-premium border-white/20 hover:border-white/40 text-white text-base px-8 py-5 uppercase font-bold tracking-wider h-auto rounded-xl shadow-xl transition-all duration-300"
                 onClick={() => document.getElementById("mali-servis")?.scrollIntoView({ behavior: "smooth" })}
               >
                 Saznaj Više
