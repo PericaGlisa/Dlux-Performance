@@ -96,7 +96,8 @@ export function BookingSection() {
   }
 
   return (
-    <section id="zakazivanje" className="py-32 bg-gradient-to-b from-background via-card/30 to-background relative overflow-hidden">
+    <section id="zakazivanje" className="py-32 bg-gradient-to-b from-background via-card/30 to-background relative overflow-hidden scroll-mt-20">
+      <div id="prodaja-automobila" className="absolute top-0 pointer-events-none" />
       <div className="absolute inset-0">
         <div className="absolute top-1/3 -right-1/3 w-2/3 h-2/3 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />

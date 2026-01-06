@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { PartnerLogos } from "@/components/sections/PartnerLogos";
+import { ServiceBanners } from "@/components/sections/ServiceBanners";
 import { Suspense, lazy } from "react";
 
 // Lazy load sections below the fold
@@ -26,6 +27,7 @@ export default function Home() {
       <main>
         <Hero />
         <PartnerLogos />
+        <ServiceBanners />
         
         <Suspense fallback={<SectionLoader />}>
           <ServiceOffer />
