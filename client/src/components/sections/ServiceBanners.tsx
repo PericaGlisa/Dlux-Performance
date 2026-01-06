@@ -53,7 +53,8 @@ export function ServiceBanners() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className={cn(
-                "group relative h-[400px] sm:h-[450px] lg:h-[500px] rounded-3xl overflow-hidden cursor-pointer isolation-isolate transform-gpu",
+                "group relative h-[400px] sm:h-[450px] lg:h-[500px] rounded-3xl overflow-hidden cursor-pointer isolation-isolate",
+                "transform-gpu backface-hidden [mask-image:linear-gradient(white,white)]",
                 index === 2 && "sm:col-span-2 lg:col-span-1" // Centering the 3rd item on tablet
               )}
               onClick={() => scrollToSection(banner.id)}
