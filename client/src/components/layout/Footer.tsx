@@ -76,7 +76,7 @@ export function Footer() {
                 <Phone className="text-primary shrink-0 group-hover:text-accent transition-colors" size={20} />
                 <div>
                   <p className="text-xs uppercase text-gray-500 font-semibold tracking-wider mb-1">Pozovi</p>
-                  <a href="tel:+38160000000" className="text-gray-300 font-light hover:text-primary transition-colors">+381 60 000 0000</a>
+                  <a href="tel:+381605553848" className="text-gray-300 font-light hover:text-primary transition-colors">+381 60 5553 848</a>
                 </div>
               </motion.div>
 

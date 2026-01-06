@@ -191,7 +191,7 @@ export function Navbar() {
                   <Button
                     variant="outline"
                     className="glass-premium border-white/10 text-white font-bold h-14"
-                    onClick={() => window.open("tel:+38160000000")}
+                    onClick={() => window.open("tel:+381605553848")}
                   >
                     <Phone className="mr-2 h-4 w-4 text-primary" /> Pozovi
                   </Button>
