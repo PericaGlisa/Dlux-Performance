@@ -10,24 +10,20 @@ const menuVariants = {
     x: "100%",
     transition: {
       duration: 0.2,
-      ease: "easeInOut",
-      staggerChildren: 0.02,
-      staggerDirection: -1
+      ease: "easeInOut"
     }
   },
   open: {
     x: 0,
     transition: {
-      duration: 0,
-      staggerChildren: 0.03,
-      delayChildren: 0
+      duration: 0
     }
   }
 };
 
 const linkVariants = {
-  closed: { x: 15, opacity: 0 },
-  open: { x: 0, opacity: 1, transition: { duration: 0.2, ease: "easeOut" } }
+  closed: { x: 0, opacity: 0 },
+  open: { x: 0, opacity: 1, transition: { duration: 0 } }
 };
 
 export function Navbar() {
@@ -63,7 +59,7 @@ export function Navbar() {
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50",
-        !isOpen && "transition-all duration-300",
+        isOpen ? "transition-none" : "transition-all duration-300",
         isOpen
           ? "bg-[#030303] py-6 shadow-none"
           : scrolled
@@ -125,15 +121,15 @@ export function Navbar() {
               closed: { rotate: 0, y: 0 },
               open: { rotate: 45, y: 8 },
             }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            transition={{ type: "spring", stiffness: 500, damping: 30 }}
           />
           <motion.div
-            className="w-4 h-0.5 bg-primary rounded-full origin-center group-hover:w-6 transition-all duration-300"
+            className="w-4 h-0.5 bg-primary rounded-full origin-center group-hover:w-6 transition-all duration-200"
             variants={{
               closed: { opacity: 1, x: 2 },
               open: { opacity: 0, x: -20 },
             }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.1 }}
           />
           <motion.div
             className="w-6 h-0.5 bg-white rounded-full origin-center"
@@ -141,7 +137,7 @@ export function Navbar() {
               closed: { rotate: 0, y: 0 },
               open: { rotate: -45, y: -8 },
             }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            transition={{ type: "spring", stiffness: 500, damping: 30 }}
           />
         </motion.button>
       </div>
@@ -155,6 +151,7 @@ export function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0 }}
               className="fixed inset-0 bg-black z-[55] md:hidden"
               onClick={() => setIsOpen(false)}
             />
