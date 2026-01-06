@@ -66,8 +66,8 @@ export function Footer() {
                 <div>
                   <p className="text-xs uppercase text-gray-500 font-semibold tracking-wider mb-1">Lokacija</p>
                   <span className="text-gray-300 font-light">
-                    Batajnički drum 1<br />
-                    11273 Batajnica, Beograd
+                    Dragutina Đorđevića 22, Šangaj<br />
+                    11273 Batajnica
                   </span>
                 </div>
               </motion.div>
@@ -84,7 +84,7 @@ export function Footer() {
                 <Mail className="text-primary shrink-0 group-hover:text-accent transition-colors" size={20} />
                 <div>
                   <p className="text-xs uppercase text-gray-500 font-semibold tracking-wider mb-1">Email</p>
-                  <a href="mailto:info@dlux-performance.rs" className="text-gray-300 font-light hover:text-primary transition-colors">info@dlux-performance.rs</a>
+                  <a href="mailto:info@dlux-performance.com" className="text-gray-300 font-light hover:text-primary transition-colors">info@dlux-performance.com</a>
                 </div>
               </motion.div>
             </div>

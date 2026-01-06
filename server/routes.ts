@@ -45,7 +45,7 @@ export async function registerRoutes(
 
       // For now, we simulate success and log the data
       console.log("--- SIMULATED EMAIL SENDING ---");
-      console.log("To: info@dlux.rs"); // Placeholder for official email
+      console.log("To: info@dlux-performance.com"); // Placeholder for official email
       console.log("Subject:", `Novi zahtev za servis: ${data.name}`);
       console.log("Body:", JSON.stringify(data, null, 2));
       console.log("--- END SIMULATION ---");

@@ -73,7 +73,7 @@ export function BookingSection() {
         bodyText += `\nNapomena:\n${values.message}\n`;
       }
 
-      const mailtoUrl = `mailto:office@dlux-performance.rs?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
+      const mailtoUrl = `mailto:info@dlux-performance.com?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
       
       // Otvaranje mail klijenta
       window.location.href = mailtoUrl;
@@ -156,8 +156,8 @@ export function BookingSection() {
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-2 font-heading">Lokacija Servisa</h3>
                   <p className="text-gray-300 mb-4 font-light">
-                    Batajnički drum 1<br />
-                    11273 Batajnica, Beograd
+                    Dragutina Đorđevića 22, Šangaj<br />
+                    11273 Batajnica
                   </p>
                   <div className="relative w-full h-56 bg-gradient-to-br from-gray-800 to-black rounded-2xl overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-500 shadow-lg hover:shadow-2xl">
                     <iframe
