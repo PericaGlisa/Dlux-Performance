@@ -9,8 +9,7 @@ const menuVariants = {
   closed: {
     x: "100%",
     transition: {
-      duration: 0.2,
-      ease: "easeInOut"
+      duration: 0
     }
   },
   open: {
@@ -62,8 +61,8 @@ export function Navbar() {
         isOpen
           ? "bg-[#030303] py-6 shadow-none"
           : scrolled
-            ? "bg-background/80 backdrop-blur-lg md:backdrop-blur-2xl border-b border-white/5 py-3 shadow-2xl transition-all duration-300"
-            : "bg-transparent py-6 transition-all duration-300"
+            ? "bg-background/80 backdrop-blur-lg md:backdrop-blur-2xl border-b border-white/5 py-3 shadow-2xl"
+            : "bg-transparent py-6"
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-4 md:px-8">
