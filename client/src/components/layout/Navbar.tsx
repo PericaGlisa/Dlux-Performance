@@ -63,7 +63,7 @@ export function Navbar() {
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50",
-        !isOpen && "transition-all duration-500",
+        !isOpen && "transition-all duration-300",
         isOpen
           ? "bg-[#030303] py-6 shadow-none"
           : scrolled
@@ -155,7 +155,7 @@ export function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[55] md:hidden"
+              className="fixed inset-0 bg-black z-[55] md:hidden"
               onClick={() => setIsOpen(false)}
             />
 
