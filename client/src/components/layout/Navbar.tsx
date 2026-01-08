@@ -54,7 +54,7 @@ export function Navbar() {
     <>
       <nav
         className={cn(
-          "fixed top-0 left-0 right-0 z-[100] transition-all duration-300 border-b",
+          "fixed top-0 left-0 right-0 z-[100] transition-all duration-200 ease-out border-b",
           scrolled || isOpen
             ? "bg-background/90 backdrop-blur-xl border-white/5 py-3 shadow-lg supports-[backdrop-filter]:bg-background/60"
             : "bg-transparent border-transparent py-3 md:py-6"
