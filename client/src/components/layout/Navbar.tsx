@@ -54,7 +54,7 @@ export function Navbar() {
     <>
       <nav
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
+          "fixed top-0 left-0 right-0 z-[100] transition-all duration-300 border-b",
           scrolled || isOpen
             ? "bg-background/90 backdrop-blur-xl border-white/5 py-3 shadow-lg supports-[backdrop-filter]:bg-background/60"
             : "bg-transparent border-transparent py-4 md:py-6"
@@ -121,8 +121,8 @@ export function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[90] bg-black/95 backdrop-blur-sm lg:hidden pt-24 px-6 pb-8 flex flex-col overflow-y-auto"
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="fixed inset-0 z-[90] bg-black/95 backdrop-blur-sm lg:hidden pt-24 px-6 pb-8 flex flex-col overflow-y-auto will-change-[opacity]"
           >
             <div className="flex flex-col gap-2 mb-8">
               {navItems.map((item, i) => (
@@ -130,9 +130,9 @@ export function Navbar() {
                   key={item.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 + 0.1 }}
+                  transition={{ delay: i * 0.05, duration: 0.2 }}
                   onClick={() => scrollToSection(item.id)}
-                  className="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/5 active:bg-white/10 active:scale-[0.98] transition-all group text-left"
+                  className="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/5 active:bg-white/10 active:scale-[0.98] transition-all group text-left will-change-[transform,opacity]"
                 >
                   <span className="text-lg font-heading font-bold text-gray-200 group-hover:text-white">
                     {item.label}
