@@ -72,7 +72,7 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-8">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -94,7 +94,7 @@ export function Navbar() {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden relative z-[60] w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus:outline-none"
+            className="lg:hidden relative z-[60] w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus:outline-none"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
@@ -122,7 +122,7 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[55] bg-black/95 backdrop-blur-sm md:hidden pt-24 px-6 pb-8 flex flex-col overflow-y-auto"
+            className="fixed inset-0 z-[55] bg-black/95 backdrop-blur-sm lg:hidden pt-24 px-6 pb-8 flex flex-col overflow-y-auto"
           >
             <div className="flex flex-col gap-2 mb-8">
               {navItems.map((item, i) => (
