@@ -57,7 +57,7 @@ export function Navbar() {
           "fixed top-0 left-0 right-0 z-[100] transition-all duration-300 border-b",
           scrolled || isOpen
             ? "bg-background/90 backdrop-blur-xl border-white/5 py-3 shadow-lg supports-[backdrop-filter]:bg-background/60"
-            : "bg-transparent border-transparent py-4 md:py-6"
+            : "bg-transparent border-transparent py-3 md:py-6"
         )}
       >
         <div className="container mx-auto flex items-center justify-between px-4 md:px-8">
