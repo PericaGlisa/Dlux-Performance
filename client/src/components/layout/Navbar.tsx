@@ -94,20 +94,20 @@ export function Navbar() {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="lg:hidden relative z-[60] w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus:outline-none"
+            className="lg:hidden relative z-[100] w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus:outline-none"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
             <motion.span
-              animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+              animate={isOpen ? { rotate: 45, y: 8, backgroundColor: "#ffffff" } : { rotate: 0, y: 0, backgroundColor: scrolled ? "#ffffff" : "#ffffff" }}
               className="w-8 h-0.5 bg-white rounded-full block transition-transform origin-center"
             />
             <motion.span
-              animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+              animate={isOpen ? { opacity: 0 } : { opacity: 1, backgroundColor: scrolled ? "#dc2626" : "#dc2626" }}
               className="w-5 h-0.5 bg-primary rounded-full block transition-opacity self-end"
             />
             <motion.span
-              animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+              animate={isOpen ? { rotate: -45, y: -8, backgroundColor: "#ffffff" } : { rotate: 0, y: 0, backgroundColor: scrolled ? "#ffffff" : "#ffffff" }}
               className="w-8 h-0.5 bg-white rounded-full block transition-transform origin-center"
             />
           </button>
@@ -122,7 +122,7 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[55] bg-black/95 backdrop-blur-sm lg:hidden pt-24 px-6 pb-8 flex flex-col overflow-y-auto"
+            className="fixed inset-0 z-[90] bg-black/95 backdrop-blur-sm lg:hidden pt-24 px-6 pb-8 flex flex-col overflow-y-auto"
           >
             <div className="flex flex-col gap-2 mb-8">
               {navItems.map((item, i) => (
