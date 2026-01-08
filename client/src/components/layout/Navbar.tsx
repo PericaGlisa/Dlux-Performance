@@ -1,29 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Menu, X, Phone, Calendar, ChevronRight } from "lucide-react";
+import { Menu, X, Phone, Calendar, MapPin, ChevronRight, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-
-const menuVariants = {
-  closed: {
-    x: "100%",
-    transition: {
-      duration: 0
-    }
-  },
-  open: {
-    x: 0,
-    transition: {
-      duration: 0
-    }
-  }
-};
-
-const linkVariants = {
-  closed: { x: 0, opacity: 0 },
-  open: { x: 0, opacity: 1, transition: { duration: 0 } }
-};
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,13 +11,13 @@ export function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent scroll when menu is open
+  // Lock scroll when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -50,170 +30,161 @@ export function Navbar() {
     setIsOpen(false);
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      const offset = 80; // Header height offset
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
     }
   };
 
+  const navItems = [
+    { label: "Prodaja Automobila", id: "prodaja-automobila", icon: ChevronRight },
+    { label: "Mali Servis", id: "mali-servis", icon: ChevronRight },
+    { label: "Delovi", id: "delovi", icon: ChevronRight },
+    { label: "Lokacija", id: "lokacija", icon: MapPin },
+  ];
+
   return (
-    <nav
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50",
-        isOpen
-          ? "bg-[#030303] py-6 shadow-none"
-          : scrolled
-            ? "bg-background/80 backdrop-blur-lg md:backdrop-blur-2xl border-b border-white/5 py-3 shadow-2xl"
-            : "bg-transparent py-6"
-      )}
-    >
-      <div className="container mx-auto flex items-center justify-between px-4 md:px-8">
-        <div className="flex items-center gap-3">
-          <Link href="/" className="group cursor-pointer">
-            <div className="text-2xl md:text-3xl font-heading font-bold tracking-tighter text-white">
+    <>
+      <nav
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
+          scrolled || isOpen
+            ? "bg-background/90 backdrop-blur-xl border-white/5 py-3 shadow-lg supports-[backdrop-filter]:bg-background/60"
+            : "bg-transparent border-transparent py-4 md:py-6"
+        )}
+      >
+        <div className="container mx-auto flex items-center justify-between px-4 md:px-8">
+          {/* Logo */}
+          <Link href="/" className="relative z-[60] group cursor-pointer" onClick={() => setIsOpen(false)}>
+            <div className="text-xl md:text-2xl font-heading font-bold tracking-tighter text-white leading-none">
               D-LUX
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-accent group-hover:from-accent group-hover:to-primary transition-all duration-500">
+              <span className="block text-xs md:text-sm text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent font-medium tracking-[0.3em] group-hover:tracking-[0.4em] transition-all duration-500">
                 PERFORMANCE
               </span>
             </div>
           </Link>
-        </div>
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-6 lg:gap-12">
-          {[
-            { label: "MALI SERVIS", id: "mali-servis" },
-            { label: "DELOVI", id: "delovi" },
-            { label: "LOKACIJA", id: "lokacija" },
-          ].map((item) => (
-            <motion.button
-              key={item.id}
-              onClick={() => scrollToSection(item.id)}
-              className="text-xs font-bold tracking-[0.2em] text-gray-300 hover:text-white transition-colors relative group cursor-pointer"
-              whileHover={{ y: -2 }}
-            >
-              {item.label}
-              <div className="absolute -bottom-2 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-300" />
-            </motion.button>
-          ))}
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="text-xs font-bold tracking-[0.15em] text-gray-300 hover:text-white transition-colors relative group uppercase"
+              >
+                {item.label}
+                <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+              </button>
+            ))}
 
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
             <Button
               onClick={() => scrollToSection("zakazivanje")}
-              className="bg-gradient-to-r from-primary to-accent hover:shadow-lg text-white font-bold uppercase tracking-wider py-3 px-8 rounded-lg shadow-lg hover:shadow-primary/20 transition-all duration-300 glow-pulse"
+              className="bg-primary hover:bg-primary/90 text-white font-bold uppercase tracking-wider px-6 rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all duration-300 transform hover:-translate-y-0.5"
             >
-              <Calendar className="mr-2 h-4 w-4" /> Zakaži Odmah
+              <Calendar className="mr-2 h-4 w-4" /> Zakaži
             </Button>
-          </motion.div>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            className="md:hidden relative z-[60] w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus:outline-none"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            <motion.span
+              animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+              className="w-8 h-0.5 bg-white rounded-full block transition-transform origin-center"
+            />
+            <motion.span
+              animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+              className="w-5 h-0.5 bg-primary rounded-full block transition-opacity self-end"
+            />
+            <motion.span
+              animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+              className="w-8 h-0.5 bg-white rounded-full block transition-transform origin-center"
+            />
+          </button>
         </div>
+      </nav>
 
-        {/* Mobile Menu Toggle - Premium Magnetic Lines */}
-        <motion.button
-          className="md:hidden relative w-12 h-12 flex flex-col items-center justify-center gap-[6px] text-white z-[60] glass-premium rounded-xl group"
-          onClick={() => setIsOpen(!isOpen)}
-          whileTap={{ scale: 0.9 }}
-          animate={isOpen ? "open" : "closed"}
-        >
-          <motion.div
-            className="w-6 h-0.5 bg-white rounded-full origin-center"
-            variants={{
-              closed: { rotate: 0, y: 0 },
-              open: { rotate: 45, y: 8 },
-            }}
-            transition={{ type: "spring", stiffness: 500, damping: 30 }}
-          />
-          <motion.div
-            className="w-4 h-0.5 bg-primary rounded-full origin-center group-hover:w-6 transition-all duration-200"
-            variants={{
-              closed: { opacity: 1, x: 2 },
-              open: { opacity: 0, x: -20 },
-            }}
-            transition={{ duration: 0.1 }}
-          />
-          <motion.div
-            className="w-6 h-0.5 bg-white rounded-full origin-center"
-            variants={{
-              closed: { rotate: 0, y: 0 },
-              open: { rotate: -45, y: -8 },
-            }}
-            transition={{ type: "spring", stiffness: 500, damping: 30 }}
-          />
-        </motion.button>
-      </div>
-
-      {/* Modern Full-Screen Mobile Drawer */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
-          <>
-            {/* Backdrop Blur Overlay */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0 }}
-              className="fixed inset-0 bg-black z-[55] md:hidden"
-              onClick={() => setIsOpen(false)}
-            />
-
-            <motion.div
-              variants={menuVariants}
-              initial="closed"
-              animate="open"
-              exit="closed"
-              className="fixed inset-y-0 right-0 w-full max-w-sm bg-[#030303] border-l border-white/5 z-[58] md:hidden shadow-[10px_0_40px_rgba(0,0,0,0.8)] flex flex-col p-8 pt-32"
-              style={{ willChange: "transform" }}
-            >
-              <div className="flex flex-col gap-8 flex-1">
-                {[
-                  { label: "MALI SERVIS", id: "mali-servis" },
-                  { label: "DELOVI", id: "delovi" },
-                  { label: "LOKACIJA", id: "lokacija" },
-                  { label: "ZAKAZIVANJE", id: "zakazivanje" },
-                ].map((item) => (
-                  <motion.button
-                    key={item.id}
-                    variants={linkVariants}
-                    onClick={() => scrollToSection(item.id)}
-                    className="text-4xl font-heading font-bold text-gray-400 hover:text-white text-left transition-colors flex items-center justify-between group"
-                  >
-                    <span>{item.label}</span>
-                    <ChevronRight className="opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all text-primary" />
-                  </motion.button>
-                ))}
-              </div>
-
-              {/* Mobile Contact Quick Actions */}
-              <motion.div
-                variants={linkVariants}
-                className="mt-auto space-y-4"
-              >
-                <p className="text-xs font-bold tracking-[0.3em] text-gray-500 uppercase mb-4">Kontakt Centar</p>
-                <div className="grid grid-cols-2 gap-4">
-                  <Button
-                    variant="outline"
-                    className="glass-premium border-white/10 text-white font-bold h-14"
-                    onClick={() => window.open("tel:+381605553848")}
-                  >
-                    <Phone className="mr-2 h-4 w-4 text-primary" /> Pozovi
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="glass-premium border-white/10 text-white font-bold h-14"
-                    onClick={() => scrollToSection("lokacija")}
-                  >
-                    <Menu className="mr-2 h-4 w-4 text-accent" /> Mapa
-                  </Button>
-                </div>
-                <Button
-                  className="w-full bg-gradient-to-r from-primary to-accent text-white font-bold uppercase tracking-wider h-14"
-                  onClick={() => scrollToSection("zakazivanje")}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[55] bg-black/95 backdrop-blur-sm md:hidden pt-24 px-6 pb-8 flex flex-col overflow-y-auto"
+          >
+            <div className="flex flex-col gap-2 mb-8">
+              {navItems.map((item, i) => (
+                <motion.button
+                  key={item.id}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 + 0.1 }}
+                  onClick={() => scrollToSection(item.id)}
+                  className="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/5 active:bg-white/10 active:scale-[0.98] transition-all group text-left"
                 >
-                  <Calendar className="mr-2 h-4 w-4" /> Zakaži Besplatno
+                  <span className="text-lg font-heading font-bold text-gray-200 group-hover:text-white">
+                    {item.label}
+                  </span>
+                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+                    <item.icon className="w-4 h-4" />
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="mt-auto grid gap-3"
+            >
+              <div className="flex gap-3">
+                <Button
+                  variant="outline"
+                  className="flex-1 h-12 bg-white/5 border-white/10 hover:bg-white/10 text-white rounded-xl"
+                  onClick={() => window.open("tel:+381605553848")}
+                >
+                  <Phone className="mr-2 h-4 w-4 text-primary" />
+                  Pozovi
                 </Button>
-              </motion.div>
+                <Button
+                  variant="outline"
+                  className="flex-1 h-12 bg-white/5 border-white/10 hover:bg-white/10 text-white rounded-xl"
+                  onClick={() => scrollToSection("lokacija")}
+                >
+                  <MapPin className="mr-2 h-4 w-4 text-accent" />
+                  Mapa
+                </Button>
+              </div>
+              
+              <Button
+                className="w-full h-14 bg-gradient-to-r from-primary to-accent text-white font-bold uppercase tracking-wider rounded-xl shadow-lg shadow-primary/20"
+                onClick={() => scrollToSection("zakazivanje")}
+              >
+                <Calendar className="mr-2 h-5 w-5" />
+                Zakaži Odmah
+              </Button>
+              
+              <div className="flex items-center justify-center gap-2 mt-4 text-xs text-gray-500 font-medium">
+                <Clock className="w-3 h-3" />
+                <span>Pon - Sub: 09:00 - 17:00</span>
+              </div>
             </motion.div>
-          </>
+          </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 }
